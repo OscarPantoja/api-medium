@@ -1,8 +1,8 @@
 
 const Post = require('../models/posts')
 
-function create ({ title, author, date, timeToRead, img }) {
-  const newPost = new Post({ title, author, date, timeToRead, img })
+function create ({ title, author, dateCreated, timeToRead, img }) {
+  const newPost = new Post({ title, author, dateCreated, timeToRead, img })
   return newPost.save()
 }
 

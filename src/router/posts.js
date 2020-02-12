@@ -3,16 +3,20 @@ const express = require('express')
 
 const post = require('../useCases/posts')
 
+const auth = require('../middlewares/auth')
+
 const router = express.Router()
+
+router.use(auth)
 
 router.get('/', async (request, response) => {
   try {
-    const posts = await post.getAll()
+    const allPosts = await post.getAll()
     response.json({
       success: true,
       message: 'all posts',
       data: {
-        posts
+        allPosts
       }
     })
   } catch (error) {
@@ -73,7 +77,10 @@ router.delete('/:id', async (request, response) => {
 
     response.json({
       success: true,
-      message: 'Post deleted'
+      message: 'Post deleted',
+      data: {
+        post: postDelete
+      }
     })
   } catch (error) {
     response.status(400)
